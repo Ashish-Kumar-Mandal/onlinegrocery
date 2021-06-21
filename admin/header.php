@@ -1,10 +1,11 @@
 <?php 
+session_start();
+
 if(!isset($_SESSION['user_id'])){
     header('Location:../login.php');
     session_destroy();
 }
 
-session_start();
 include_once('connect_db.php')
 ?>
 

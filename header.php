@@ -37,7 +37,7 @@ include_once('admin/connect_db.php')
         <div class="butns">
             <?php if(isset($_SESSION['name'])){?>
                 <p class="title"><?php echo "Hi: ".$_SESSION['name'];?></p>
-                <a href="user_profile.php">Profile</a>
+                <a href="user_profile.php" id="profile">Profile</a>
                <?php 
                 echo " <a href='logout.php' id='logout'>LogOut</a>";
                     if(@$_SESSION['user_id']<=2){
