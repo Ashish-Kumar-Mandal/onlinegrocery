@@ -35,15 +35,11 @@
       $query = mysqli_query($conn, "SELECT * FROM users WHERE (email='$username' OR mobile='$username') AND password='$pass'");
       while ($record = mysqli_fetch_array($query)){
         $user_id = $record['user_id'];
-        $f_name = $record['f_name'];
-        $l_name = $record['l_name'];
-        $name = $f_name.' '.$l_name;
       }
 
       $row = mysqli_num_rows($query);
 
       if($row == 1){
-        $_SESSION['name'] = $name;
         $_SESSION['user_id'] = $user_id;
         $done='You have loged in succesfully';
         echo "<script>window.open('index.php?done=".$done."','_self');</script>";

@@ -35,8 +35,17 @@ include_once('admin/connect_db.php')
         <button id="btn">Search</button>
         </div>
         <div class="butns">
-            <?php if(isset($_SESSION['name'])){?>
-                <p class="title"><?php echo "Hi: ".$_SESSION['name'];?></p>
+            <?php if(isset($_SESSION['user_id'])){
+
+                $query = mysqli_query($conn, "SELECT * from users WHERE user_id='".$_SESSION['user_id']."'");
+                while($row =  mysqli_fetch_array($query)){
+                    $f_name =  $row['f_name'];
+                    $l_name =  $row['l_name'];
+                    $name = $f_name.' '.$l_name;
+                }
+
+                ?>
+                <p class="title"><?php echo "Hi: ".$name;?></p>
                 <a href="user_profile.php" id="profile">Profile</a>
                <?php 
                 echo " <a href='logout.php' id='logout'>LogOut</a>";
