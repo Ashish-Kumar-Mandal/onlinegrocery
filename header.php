@@ -1,7 +1,6 @@
 <?php 
 session_start();
-include_once('admin/connect_db.php')
-
+include_once('admin/connect_db.php');
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +30,10 @@ include_once('admin/connect_db.php')
             </ul>
         </nav>
         <div class="search">
-        <input type="text" name=" search" id="search1" >
-        <button id="btn">Search</button>
+            <form method="post" action="items_search.php">
+                <input type="text" name="search" placeholder="search here..." required>
+                <input type="submit" name="search_btn" value="Search">
+            </form>
         </div>
         <div class="butns">
             <?php if(isset($_SESSION['user_id'])){
@@ -44,17 +45,27 @@ include_once('admin/connect_db.php')
                     $name = $f_name.' '.$l_name;
                 }
 
+                $query = mysqli_query($conn, "SELECT COUNT(mc_id) as total_items FROM manage_cart WHERE user_id='".$_SESSION['user_id']."'");
+    
+                while ($row = mysqli_fetch_array($query)){
+                    $total_items = $row['total_items'];
+                }
+                
                 ?>
                 <p class="title"><?php echo "Hi: ".$name;?></p>
                 <a href="user_profile.php" id="profile">Profile</a>
                <?php 
                 echo " <a href='logout.php' id='logout'>LogOut</a>";
+
+                    if(isset($_SESSION)){?>
+                        <a href="manage_cart.php"><button type="button" class="btn btn-secondary mx-2" id="popcart" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Add Cart">
+                <span id="cart"><?php echo $total_items; ?></span></button></a>
+                    <?php }
+
                     if(@$_SESSION['user_id']<=2){
                         echo " <a href='admin/dashboard.php' id='admin'>Admin</a>";
                     }
-                    if(isset($_SESSION)){
-                        echo "<i class='fa fa-shopping-cart cart'></i>";
-                    }
+                    
                 }else{?>                
                 <button id="log" onclick="window.location.href='login.php';">Log In</button>
                 <button id="sign" onclick="window.location.href='signup.php';">Sign Up</button>

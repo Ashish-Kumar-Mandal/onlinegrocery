@@ -3,33 +3,21 @@
 if(!isset($_SESSION['user_id'])){
     header('location: login.php');
 }
-$search = $_SESSION['search'];
-echo "<script>alert($search);</script>";
+
 ?>
 
      <container class="categorycontainer">
     <div class="categoryHeading"> 
-        <?php
-        if(isset($_GET['id']) and $_GET['id']!=""){
-            $query = mysqli_query($conn, "SELECT * FROM category WHERE cat_id=".$_GET['id']);
-            while ($row = mysqli_fetch_array($query)){
-                $cat_name = $row['cat_name'];
-            }
-        }else{
-            $cat_name = "...";
-        }
-            
-        ?>
-            <h2><?php echo $cat_name; ?> Items</h2>
+            <h2>Search Items</h2>
     </div>
     <div class="categoryContent">
          <div class="categoryCommon">
              <?php
-             if(isset($_GET['id']) and $_GET['id']!=""){
-                    $query = mysqli_query($conn, "SELECT * FROM items WHERE item_category=".$_GET['id']);
-             }else if($_GET['id']==""){
+             if(isset($_POST['search_btn']) and $_POST['search']!=""){
+                 $search = $_POST['search'];
+                 $_SESSION['search'] = $_POST['search'];
                     $query = mysqli_query($conn, "SELECT * FROM items WHERE item_name LIKE '%{$search}%'");
-             }
+                    if(mysqli_num_rows($query)>0){
                     while ($row = mysqli_fetch_array($query)){
                       $id = $row['item_id'];
                       $item_img = $row['item_img'];
@@ -47,7 +35,10 @@ echo "<script>alert($search);</script>";
 
                         </form>
                         </div>
-                    <?php }  ?>
+                    <?php } }else{
+                        echo '<div class="item">No Record Found</div>';
+                    }
+                } ?>
          </div>
      </div>
  </container>
@@ -60,7 +51,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['Add_To_Cart'])){
         $items_id = $_POST['items_id'];
         $user_id = $_SESSION['user_id'];
-        
+
         $query = mysqli_query($conn, "INSERT INTO manage_cart(user_id, item_id) VALUES('$user_id','$items_id')");
         if($query){
             $id = $_GET["id"];
