@@ -3,8 +3,11 @@
 if(!isset($_SESSION['user_id'])){
     header('location: login.php');
 }
-$search = $_SESSION['search'];
-echo "<script>alert($search);</script>";
+
+if(isset($_SESSION['search'])){
+    $search = $_SESSION['search'];
+}
+
 ?>
 
      <container class="categorycontainer">

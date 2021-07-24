@@ -28,7 +28,7 @@
                 </div>
            </form>
     </div>
-    </conatiner>
+    </container>
 <?php include_once('footer.php') ?>
 
 <?php

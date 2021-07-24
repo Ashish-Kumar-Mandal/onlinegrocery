@@ -19,8 +19,7 @@
                             <a href="items.php?id=<?php echo $row['cat_id']; ?>"><?php echo $row['cat_name']; ?></a>
                         </div>
                     <?php } ?>
-                 </div>
-                 
+                 </div> 
             </div>
         </div>
     </container>

@@ -30,14 +30,14 @@
                   </thead>
                   <td><label for="cat">Choose Category</label></td>
                   <td>
-			      <select id="category" name="category" required>
-              <option value="">...Select Category...</option>
+                  <select id="category" name="category" required>
 				  <?php
-					$query = mysqli_query($conn, "SELECT * FROM category");
+					$query = mysqli_query($conn, "SELECT * FROM category ");
 					while ($row = mysqli_fetch_array($query)){
 						echo "<option value=".$row['cat_id'].">".$row['cat_name']."</option>";
 					}
-				  ?>				
+				  ?>	
+         			
 			      </select>
                   </td>
              </tr>
@@ -131,7 +131,7 @@
                 <td>&#8377; <?php echo $row['item_price'];?> / Kg</td>
                 <td><?php echo $row['cat_name'];?></td>
                 <td><img width="100" height="100" src="../items/<?php echo $row['item_img'];?>" alt=""></td>
-                <td><a id="update"href="update_items.php?id=<?php echo $row['item_id']?>">Update</a></td>
+                <td><a id="update"href="update_items.php?id=<?php echo $row['item_id'];?>">Update</a></td>
                 <td><a id="delete"href="delete_items.php?id=<?php echo $row['item_id']; ?>">&times;</a></td>
              </tr>
             <?php $i++; } ?>

@@ -41,7 +41,7 @@
 
       if($row == 1){
         $_SESSION['user_id'] = $user_id;
-        $done='You have loged in succesfully';
+        $done='You have logged in succesfully';
         echo "<script>window.open('index.php?done=".$done."','_self');</script>";
         exit();
       }else{

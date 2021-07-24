@@ -1,5 +1,4 @@
 <?php include_once('header.php');
-
 $user_id = $_SESSION['user_id'];
 $query = mysqli_query($conn, "SELECT * from users WHERE user_id=$user_id");
 while($row =  mysqli_fetch_array($query)){
@@ -9,7 +8,6 @@ while($row =  mysqli_fetch_array($query)){
     $mobile =  $row['mobile'];
     $address =  $row['address'];
 }
-
 ?>
 <container class="signupcontainer">
     <div class="signupheading">
@@ -36,7 +34,8 @@ while($row =  mysqli_fetch_array($query)){
            </form>
     </div>
     </container>
-<?php include_once('footer.php');?>
+<?php include_once('footer.php');?> 
+
 
 <?php
   if(isset($_POST['save'])){
@@ -47,7 +46,7 @@ while($row =  mysqli_fetch_array($query)){
     $address = mysqli_real_escape_string($conn, $_POST['address']);
 
         $query = mysqli_query($conn, "UPDATE users SET f_name='$f_name', l_name='$l_name', email='$email', mobile='$mobile', address='$address' WHERE user_id='$user_id'");
-        
+
         if($query){
           $done = 'Profile Updated Successfully.';
           echo "<script>window.open('user_profile.php?done=".$done."','_self');</script>";
@@ -58,4 +57,4 @@ while($row =  mysqli_fetch_array($query)){
           exit();
         }
     }
-?>
+?> 

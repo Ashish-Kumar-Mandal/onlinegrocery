@@ -31,8 +31,8 @@ include_once('admin/connect_db.php');
         </nav>
         <div class="search">
             <form method="post" action="items_search.php">
-                <input type="text" name="search" placeholder="search here..." required>
-                <input type="submit" name="search_btn" value="Search">
+                <input  id="searchinput"type="text" name="search" placeholder="search products..." required>
+                <input type="submit" name="search_btn" value="Search" id="search1">
             </form>
         </div>
         <div class="butns">
@@ -58,8 +58,8 @@ include_once('admin/connect_db.php');
                 echo " <a href='logout.php' id='logout'>LogOut</a>";
 
                     if(isset($_SESSION)){?>
-                        <a href="manage_cart.php"><button type="button" class="btn btn-secondary mx-2" id="popcart" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Add Cart">
-                <span id="cart"><?php echo $total_items; ?></span></button></a>
+                        <a href="manage_cart.php" id="cart">
+                <span>Cart(<?php echo $total_items; ?>)</span></a>
                     <?php }
 
                     if(@$_SESSION['user_id']<=2){
@@ -82,4 +82,3 @@ include_once('admin/connect_db.php');
             <center style="text-align:center;cursor:pointer;" id="hide" title='Close It'><a onclick="document.getElementById('hide').style.display='none'"><span style="padding: 10px; background-color: #ffffff; color: #00ff00; font-size: 20px; font-weight: bold; border-radius: 5px; "><?php echo @$_GET['done']; ?>
                 </span></center>
         <?php }else{ echo ""; } ?>
-        

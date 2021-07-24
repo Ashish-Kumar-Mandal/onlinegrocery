@@ -7,15 +7,13 @@ if(isset($_POST)){
     $item_img_old=$row['item_img'];
     $item_price=$row['item_price'];
     $item_category=$row['item_category'];
+  }
 
     $query = mysqli_query($conn, "SELECT * FROM category WHERE cat_id=$item_category");
     while ($row = mysqli_fetch_array($query)){
       $cat_name=$row['cat_name'];
     }
   }
-}
-
-
 ?>
   
 	<container class="itemForm">
