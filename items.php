@@ -63,8 +63,19 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['Add_To_Cart'])){
         $items_id = $_POST['items_id'];
         $user_id = $_SESSION['user_id'];
-        
-        $query = mysqli_query($conn, "INSERT INTO manage_cart(user_id, item_id) VALUES('$user_id','$items_id')");
+        $quantity = "";
+
+        $query = mysqli_query($conn, "SELECT * FROM manage_cart WHERE user_id='$user_id' AND item_id='$items_id'");
+        while ($row = mysqli_fetch_array($query)){
+          $quantity = $row['quantity'];
+        }
+
+        if($quantity){
+            $query = mysqli_query($conn, "UPDATE manage_cart SET quantity='$quantity'+1 WHERE user_id='$user_id' AND item_id='$items_id'");
+        }else{
+            $query = mysqli_query($conn, "INSERT INTO manage_cart(user_id, item_id, quantity) VALUES('$user_id','$items_id', 1)");
+        }
+
         if($query){
             $id = $_GET["id"];
             echo "<script>window.location.href='items.php?id=$id'</script>";

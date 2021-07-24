@@ -45,7 +45,7 @@ include_once('admin/connect_db.php');
                     $name = $f_name.' '.$l_name;
                 }
 
-                $query = mysqli_query($conn, "SELECT COUNT(mc_id) as total_items FROM manage_cart WHERE user_id='".$_SESSION['user_id']."'");
+                $query = mysqli_query($conn, "SELECT SUM(quantity) as total_items FROM manage_cart WHERE user_id='".$_SESSION['user_id']."'");
     
                 while ($row = mysqli_fetch_array($query)){
                     $total_items = $row['total_items'];
